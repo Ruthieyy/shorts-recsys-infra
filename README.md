@@ -150,7 +150,7 @@ Set `KAFKA_BOOTSTRAP_SERVERS` to the broker. The Python feature worker is the pa
 
 ## Tests and CI
 
-`pytest` covers the metric definitions, the leave-one-out split, the watch-time proxy, two-tower overfitting on a toy identity problem, FAISS bundle load, the effect of online recent items on rank order, the champion comparison, an MLflow alias write against sqlite, the HTTP API, and a local Spark aggregation compared with `UserFeatureState`. CI installs the CPU torch wheel, then lints, tests, and builds the serving image. The Spark image is not built in CI. `docker compose up` is the check for that service.
+`pytest` covers the metric definitions, the leave-one-out split, the watch-time proxy, two-tower overfitting on a toy identity problem, FAISS bundle load, the effect of online recent items on rank order, the champion comparison, an MLflow alias write against sqlite, the HTTP API, and a local Spark aggregation compared with `UserFeatureState`. CI installs the CPU torch wheel, then lints, tests, and builds the serving image. The test job installs Temurin 17 first: Spark 3.5's Hadoop calls `Subject.getSubject` while creating `JavaSparkContext`, and the JDK 24 default on `ubuntu-latest` rejects that call. The Spark image is not built in CI. `docker compose up` is the check for that service.
 
 ## Dataset
 

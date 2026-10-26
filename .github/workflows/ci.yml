@@ -9,8 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      # ubuntu-latest's default JDK is 24+. Spark 3.5.9's Hadoop calls
+      # Subject.getSubject while constructing JavaSparkContext, and JDK 24
+      # throws UnsupportedOperationException from that method. Temurin 17 is
+      # a Spark 3.5-supported runtime.
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
@@ -36,6 +44,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Build serving image
         run: docker build -t shorts-recsys:ci .
