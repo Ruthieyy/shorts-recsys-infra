@@ -1,0 +1,16 @@
+.venv
+.git
+docker/spark-jars
+.pytest_cache
+.ruff_cache
+**/__pycache__
+**/*.pyc
+data
+artifacts
+mlruns
+mlartifacts
+var
+results
+tests
+*.md
+!README.md

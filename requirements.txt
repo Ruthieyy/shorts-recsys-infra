@@ -1,0 +1,15 @@
+# Torch is installed separately from the CPU index so CI and Docker do not
+# pull the multi-gigabyte CUDA wheel. See the README and Dockerfile.
+faiss-cpu==1.15.1
+fastapi==0.162.0
+joblib==1.6.0
+kafka-python==3.0.12
+mlflow==3.17.2
+numpy==2.5.4
+pandas==3.1.0
+prometheus_client==0.26.0
+pyarrow==25.0.1
+pydantic==2.14.1
+redis==8.1.0
+scikit-learn==1.9.1
+uvicorn==0.54.0
