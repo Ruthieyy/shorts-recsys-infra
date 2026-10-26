@@ -1,0 +1,47 @@
+{
+  "best_epoch": 17,
+  "dataset": "movielens-latest-small",
+  "epochs_ran": 29,
+  "final_loss": 4.742225719534832,
+  "n_eval_users": 568,
+  "n_items": 6227,
+  "n_ratings": 100836,
+  "n_skipped_test_target_not_in_catalog": 35,
+  "n_train_pairs": 47356,
+  "n_users": 603,
+  "n_users_qualified": 603,
+  "package_versions": {
+    "faiss": "1.15.1",
+    "mlflow": "3.17.2",
+    "numpy": "2.5.4",
+    "scikit-learn": "1.9.1",
+    "torch": "2.14.1+cpu"
+  },
+  "popularity": {
+    "mrr": 0.0254608267507929,
+    "n_users": 568,
+    "ndcg@10": 0.024721882582268276,
+    "recall@10": 0.045774647887323945,
+    "recall@50": 0.1443661971830986
+  },
+  "protocol": "MovieLens ml-latest-small implicit leave-one-out. A positive is rating >= 4. Users need at least 5 positives. The last positive is the test item and the previous positive is validation. The two-tower trains on earlier positives. At test time every other rated title is removed from the candidate list. The ranker reorders the top 100 retrieved titles. Users whose test title never appears as a training positive for anyone are excluded from the reported averages.",
+  "ratings_sha256": "aa289ca83157595d0df6aea1be6a4ded676ddc4385472e8313a8ed9805352646",
+  "retrieval": {
+    "mrr": 0.02231473790796636,
+    "n_users": 568,
+    "ndcg@10": 0.02369738535324729,
+    "recall@10": 0.05457746478873239,
+    "recall@50": 0.16901408450704225
+  },
+  "retrieval_plus_ranker": {
+    "mrr": 0.03483983711215542,
+    "n_users": 568,
+    "ndcg@10": 0.04078264371354053,
+    "recall@10": 0.07746478873239436,
+    "recall@50": 0.176056338028169
+  },
+  "seed": 7,
+  "trained_at": "2026-10-26T20:08:34.432682+00:00",
+  "val_retrieval_recall_at_10": 0.05653710247349823,
+  "watch_time_proxy": "MovieLens has no dwell time. Replay events set watch_time_sec = (rating / 5) * 30 and liked = rating >= 4. Retrieval and the ranker do not train on watch_time_sec."
+}

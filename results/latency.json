@@ -1,0 +1,21 @@
+{
+  "base_url": "http://127.0.0.1:8000",
+  "cpu_count": 4,
+  "k": 10,
+  "max_ms": 2.748206000205755,
+  "mean_ms": 1.588197919996522,
+  "min_ms": 1.263579000124082,
+  "n": 300,
+  "note": "Client-side wall time for POST /recommend, excluding one warmup request. Single uvicorn process, Redis unset, model bundle loaded from local artifacts.",
+  "p50_ms": 1.564055000017106,
+  "p95_ms": 1.9626624501029257,
+  "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "user_ids": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ]
+}

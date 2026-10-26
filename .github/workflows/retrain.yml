@@ -1,0 +1,51 @@
+name: retrain
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Monday 08:00 UTC. Registration happens only when test metrics beat
+    # results/offline_metrics.json in the checked-out tree.
+    - cron: "0 8 * * 1"
+
+jobs:
+  retrain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+      - name: Install CPU torch and project dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install torch==2.14.1+cpu --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements.txt
+      - name: Train, evaluate, and register only if the champion loses
+        env:
+          PYTHONPATH: src
+          MLFLOW_TRACKING_URI: sqlite:///mlruns/mlflow.db
+          MLFLOW_EXPERIMENT: shorts-retrieval
+          MLFLOW_REQUIRED: "1"
+        run: python -m shorts_recsys.train
+      - name: Show gate decision
+        run: |
+          python - << 'PY'
+          import json
+          from pathlib import Path
+          decision = json.loads(Path("artifacts/last_run.json").read_text())
+          print(json.dumps(decision, indent=2, sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: retrain-output
+          path: |
+            results/offline_metrics.json
+            artifacts/last_run.json
+            artifacts/current
+          if-no-files-found: warn
